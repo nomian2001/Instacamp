@@ -1,2 +1,10 @@
-<h1> Timeline </h1>
-<h4> The new experience with instacamp </h4>
+
+<% @photos.each do |photo| %>
+    <div class="card">
+        <div class="card-header"><%= photo.username %></div>
+            <%= image_tag photo.url, class: "card-img-top", alt: "photo" %>
+        <div class="card-block">
+            <p class="card-text"><%= photo.caption %></p>
+        </div>
+    </div>
+<% end %>
