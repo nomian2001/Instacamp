@@ -18,7 +18,7 @@ puts "Seeding data"
     username = Faker::Name.name 
     caption = Faker::Quote.singular_siegler
     url  = Faker::LoremPixel.image(size: "500x600", is_gray: false, category: 'sports', number: nil, text: 'username')
-    avatar = Faker::Avatar.image(slug: "my-own-slug", size: "50x50", format: "jpg")
+    # avatar = Faker::Avatar.image(slug: "my-own-slug", size: "50x50", format: "jpg")
     like = Faker::Number.number(digits: 4)
-    Photo.create!(url: url, username: username,avatar: avatar ,caption: caption, likes_count: like)
+    Photo.create!(url: url, username: username, caption: caption, likes_count: like)
 end
