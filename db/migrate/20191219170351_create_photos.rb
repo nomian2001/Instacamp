@@ -5,7 +5,6 @@ class CreatePhotos < ActiveRecord::Migration[6.0]
       t.text :caption
       t.integer :likes_count
       t.string :url
-
       t.timestamps
     end
   end
