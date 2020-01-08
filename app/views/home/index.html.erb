@@ -1,10 +1,44 @@
 
+<h1>Timeline</h1>
+<h4>The New Instagram Experience.</h4>
+
+<%= link_to "New Photo", new_photo_path, class: "btn btn-primary"%>
+
 <% @photos.each do |photo| %>
-    <div class="card">
-        <div class="card-header"><%= photo.username %></div>
-            <%= image_tag photo.url, class: "card-img-top", alt: "photo" %>
-        <div class="card-block">
-            <p class="card-text"><%= photo.caption %></p>
-        </div>
+
+  <div class="card photo">
+    <div class="card-header">
+        <%= button_to 'Destroy', photo, method: :delete, :onclick => "return confirm('Are you sure you want to delete this post?')" %>
+        <%= photo.username%>
+        <div class="small"><%= time_ago_in_words photo.updated_at %> ago </div>
     </div>
+    <%= image_tag photo.url, class: "card-img-top", alt: "photo" %>
+    <div class="card-block">
+      <p class="card-text"> <%= photo.caption %></p>
+      <%= link_to "Edit photo", edit_photo_path(photo.id),class: "btn btn-primary" %>
+    </div>
+    
+    <div class="card-footer">                    
+      <%= form_for [photo, Comment.new] do |f| %>
+        <h6> Add username of comment </h6>
+        <%= f.text_field :username, placeholder: "Add username... ",class: "form-control" %>
+        <h6> Add comment </h6>
+        <%= f.text_field :body, placeholder: "Add a comment...", class: "form-control" %>
+        <%= f.submit "Upload", class: "btn btn-danger"%>       
+      <% end %>
+
+      <% if photo.comments.present? %>
+        <% photo.comments.each do |comment| %>
+          <div class="comment" %>
+            <strong><%= comment.username %>: </strong>
+            <%= comment.body %>
+          </div>
+        <% end %>
+      <% else %>
+        No comments yet.
+      <% end %>
+    </div>
+
+
+  </div>
 <% end %>
