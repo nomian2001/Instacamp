@@ -13,9 +13,34 @@ class CommentsController < ApplicationController
         end
     end
 
+    def edit
+        @comment = @photo.comments.find_by_id(params[:id])
+    end
+
+    def update
+        @comment = @photo.comments.find_by_id(params[:id])
+        @comment.update_attributes(comment_params)
+        if @comment.save
+          redirect_to @photo
+        else
+          render "edit"
+        end
+    end
+    
+    def show
+        redirect_to root_path
+    end
+    
+    def destroy
+        @comment = @photo.comments.find_by_id(params[:id])
+        @comment.destroy
+        redirect_to root_path
+    end
+    
     def comment_params
         params.require(:comment).permit(:username, :body)
     end
+
 
     
 end
